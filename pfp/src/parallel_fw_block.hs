@@ -1,6 +1,6 @@
-{- Sequential Floyd-Warshall algorithm with 2-D block mapping in Haskell -}
+{- Paralel Floyd-Warshall algorithm with 2-D block mapping in Haskell -}
 
-module Sequential_fw_block where 
+module Parallel_fw_block where 
 
 --import Control.Monad.Par(runPar, spawnP, get)
 import Data.List
@@ -16,10 +16,6 @@ dataAt _ [] = error "Empty List!"
 dataAt y (x:xs)  | y <= 0 = x
                  | otherwise = dataAt (y-1) xs
 
-get_int_weight :: Weight -> Int
-get_int_weight None = 9999999999999
-get_int_weight (Weight n) = n
-
 replace_nth :: [Weight] -> (Int, Weight) -> [Weight]
 replace_nth [] _ = []
 replace_nth (_:xs) (0,a) = a:xs
@@ -31,7 +27,7 @@ loops k n kth i j b l_a l_b l_c =
     else 
         if j == (b -1) then loops k n kth (i + 1) 0 b l_a l_b l_c
         else 
-            if (get_int_weight element) > (get_int_weight sum1) then loops k n kth i (j+1) b l_a l_b new_C
+            if element > sum1 then loops k n kth i (j+1) b l_a l_b new_C
             else 
                 loops k n kth i (j+1) b l_a l_b l_c
                     where element = dataAt (i*n + j) l_c
