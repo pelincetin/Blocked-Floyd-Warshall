@@ -1,4 +1,5 @@
-module Main where
+import Parallel_fw_block
+import Sequential_fw_block
 
 main :: IO ()
-main = print "hey"
+main = putStrLn "hi"
