@@ -1,4 +1,4 @@
-# PFP
+# Parallel Functional Programming Project: Blocked Floyd-Warshall
 
 
 ## Introduction
