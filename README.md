@@ -25,8 +25,7 @@ The adjacency matrix, as explained above, should have a diagonal line of Weight 
 
 ### Parallel Implementation
 		
-In order to make my program work in parallel, I called the partially dependent and inner independent phases with differing values of the for loop. I achieved this by calling spawnP on these functions and rewriting the phase functions so that they would not be recursive themselves. Additionally, spawnP requires a pure expression. The partially_dependent and inner_independent phase functions return a list of Weights. Therefore, in order for my program to compile, I had to tweak the data constructor Weight to derive normal-form data as well. In order for Weight to work both as a normal-form data and not, I also had to derive Generics, a GHC function that essentially allows the developer to use the same code with differing data types.
-
+In order to make my program work in parallel, I called the partially dependent and inner independent phases with differing values of the for loop. I achieved this by first creating a list with the possible i values of the for loop. I then mapped different elements of this list as an argument to the phase functions and called  spawnP on them. For example, if i starts from 0 and partially_dependent phase function takes i as an argument, I map 0 as an argument to the function and call it with spawnP. I also had to tweak the phase functions so that they would not be recursive themselves. Additionally, spawnP requires a pure expression. The partially_dependent and inner_independent phase functions return a list of Weights. Therefore, in order for my program to compile, I had to tweak the data constructor Weight to derive normal-form data as well. In order for Weight to work both as a normal-form data and not, I also had to derive Generics, a GHC function that essentially allows the developer to use the same code with differing data types.
 
 ## Reference
 
