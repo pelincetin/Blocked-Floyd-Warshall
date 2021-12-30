@@ -23,6 +23,11 @@ The graph is represented as a list of data constructor Weight, which has been de
 
 The adjacency matrix, as explained above, should have a diagonal line of Weight 0s run throughout it. The remaining places should either have a weighted edge or be None. To come up with a random adjacency matrix, I have used the function randomIO from the module System.Random to generate a boolean and if it is false, I prepend None to the matrix. If it is true, I need to append a Weight that has a random integer associated with it. To make it random, I use another function from the System.Random module: randomRIO. I gave it a range of -10 to 200 and it will pick a random number. I then convert this Monad to an Int and create a Weight data type and prepend that to the matrix. 
 
+### Parallel Implementation
+		
+In order to make my program work in parallel, I called the partially dependent and inner independent phases with differing values of the for loop. I achieved this by calling spawnP on these functions and rewriting the phase functions so that they would not be recursive themselves. Additionally, spawnP requires a pure expression. The partially_dependent and inner_independent phase functions return a list of Weights. Therefore, in order for my program to compile, I had to tweak the data constructor Weight to derive normal-form data as well. In order for Weight to work both as a normal-form data and not, I also had to derive Generics, a GHC function that essentially allows the developer to use the same code with differing data types.
+
+
 ## Reference
 
 https://moorejs.github.io/APSP-in-parallel/
